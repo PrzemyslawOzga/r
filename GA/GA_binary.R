@@ -1,7 +1,7 @@
-#Labolatorium 1 - przykład użycia algorytmu genetycznego w R (binary type)
-#Opis zadania: Rekrut wyjeżdża na szkołę przetrwania. Każdy zabrany przez niego przedmiot ma odpowiednią 
-#liczbę punktów odzwierciedlających szansę na przetrwanie, jednakże pojemność jego bagażu jest ograniczona 
-#do 30. Jakie przedmioty dadzą rekrutowi największą szansę na przetrwanie? 
+# Lab 1 - example of using the genetic algorithm in R (binary type)
+# Task description: The recruit goes to survival school. Each item he takes has a corresponding one
+# the number of points reflecting the chance of survival, however, the capacity of his luggage is limited
+# to 30. What items will give a recruit the best chance of survival?
 
 library(GA)
 

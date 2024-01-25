@@ -1,29 +1,29 @@
-#Labolatorium 2 - sztuczne sieci neuronowe
-#Znajdź 3 różne źródła danych (inne niż w przykładach na laboratorium/wykładzie).
-#Opracować 3 różne klasyfikatory bazujące na sztucznej sieci neuronowej (po jednym dla każdego źródła danych):
-#   dokonać wstępnego podziału danych na dane trenujące i dane testowe według wybranej metody,
-#   zaproponować strukturę sieci,
-#   przeprowadzić proces trenowania,
-#   ocenić jakość klasyfikatora na podstawie uzyskanej krzywej trenowania,
-#   przetestować uzyskany klasyfikator i określić błąd klasyfikacji, uzyskany dla danych testowych.
+# Lab 2 - artificial neural networks
+# source of 3 different data sources (different from the examples in the lab/result).
+# Develop 3 different classifiers on an artificial neural network (one for each data source):
+# by initial data set into training data and test data final methods,
+# network structure access,
+# basis of the training process,
+# assessment of the quality of the classifier based on the obtained tested curve,
+# The resulting classifier and error obtained for the test data.
 #
 #
-#Klasyfikator 3 - sztuczne sieci neuronowe
-#Trening modelu, który na podstawie wprowadzonych danych o irysach (innych danych niż poruszone na zajęciach), 
-#określa rodzaj (gatunek) kwiata.
+# Classifier 3 - artificial neural networks
+# Training model that was improved based on the given data about irises (data other than those raised in classes),
+# determination of the type (species) of the flower.
 
 library(AMORE)
 
-#Load dataset
+# Load dataset
 dataset <- read.csv("/Users/przemyslawozga/Desktop/Study/Sztuczna inteligencja - poprawa/lab2/datasets/IRIS.csv")
 
-#Preparing test and training data
+# Preparing test and training data
 set.seed(3000)
 howMuch = nrow(dataset)
 idxTraining <- sample(1:howMuch, 2*howMuch/3)
 idxTesting <- setdiff(1:howMuch, idxTraining)
 
-#Initialize function
+# nitialize function
 target <- function(x) {
   n <- length(x)
   vals <- levels(x)
@@ -39,7 +39,7 @@ x = factor(dataset$species)
 assignedValues <- target(x)
 assignedValues
 
-#Initialize neural network
+# Initialize neural network
 neuralNetwork <- newff(n.neurons = c(6,12,3),
                        learning.rate.global = 0.05,
                        momentum.global = 0.5,
@@ -48,7 +48,7 @@ neuralNetwork <- newff(n.neurons = c(6,12,3),
                        method = "ADAPTgdwm",
                        error.criterium = "LMS")
 
-#Train model, prepare and show results
+# Train model, prepare and show results
 results <- train(neuralNetwork,
                  dataset[idxTraining, -5],
                  assignedValues[idxTraining,],
@@ -57,7 +57,7 @@ results <- train(neuralNetwork,
                  show.step = 5,
                  n.shows = 800)
 
-#Create plots
+# Create plots
 plot(results$Merror, type="l", xlab="Iteration", ylab="Value", col="darkred")
 
 y <- sim(results$net, dataset[idxTesting, -5])

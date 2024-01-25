@@ -1,32 +1,32 @@
-#Labolatorium 1 - przykład użycia algorytmu genetycznego w R
-#Opis zadania: Praca listonosza - algorytm, który na podstawie kilku lokalizacji małej miejscowości
-#ma za zadanie znalezienie najszybszej dla listonosza drogi do rozniesienia listów.
+# Lab 1 - example of using the genetic algorithm in R
+# Task description: Postman's job - an algorithm based on several locations of a small town
+# is designed to find the fastest way for the postman to deliver the letters.
 
 library(GA)
 library(xlsx)
 
-#Load postman adress data
+# Load postman adress data
 postmanDeliveryAdress <- read.xlsx(file = "Desktop/Study/Sztuczna inteligencja - poprawa/lab1/postmanAdress.xlsx",  
                                     header = TRUE, row.names = TRUE, sheetIndex = 1)
 data <- as.matrix(postmanDeliveryAdress)
 
-#Initialize adaptation function
+# Initialize adaptation function
 f.adaptation <- function(postmanWay) {
   postmanWay <- c(postmanWay, postmanWay[1])
   sections <- embed(postmanWay, 2)[, 2:1]
   return (2000/sum(data[sections]))
 }
 
-#GA algorithm usage
+# GA algorithm usage
 GA <- ga(type = "permutation", fitness = f.adaptation,
          lower = 1, upper = attr(eurodist, "Size"), popSize = 40, maxiter = 2000,
          run = 500, pmutation = 0.05, pcrossover = 0.6, elitism=5, seed=1975)
 
-#Results analyze
+# Results analyze
 summary(GA)
 plot(GA)
 
-#Draw plot 
+# Draw plot 
 drawPlot=function(postmanWay)
 {
   mds <- cmdscale(postmanDeliveryAdress)
@@ -42,7 +42,7 @@ drawPlot=function(postmanWay)
 }
 drawPlot(GA@solution[1,])
 
-#Show results in command line (console)
+# Show results in command line (console)
 decode=function(postmanWay)
 {
   postmanWay <- c(postmanWay, postmanWay[1])

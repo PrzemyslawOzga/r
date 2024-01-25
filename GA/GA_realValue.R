@@ -1,5 +1,5 @@
-#Labolatorium 1 - przykład użycia algorytmu ewolucyjnego w R (real-valued type)
-#Opis zadania: Znajdź maksimum funkcji f(x) = (x^2 + 5*(-x)) * cos(2*x) dla przedziału <-5;10> 
+# Laboratory 1 - example of using the evolutionary algorithm in R (real-valued type)
+# Task description: Find the maximum of the function f(x) = (x^2 + 5*(-x)) * cos(2*x) for the interval <-5;10>
 
 library(GA)
 
